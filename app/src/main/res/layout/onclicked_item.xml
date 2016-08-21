@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent" android:clickable="true"
+    android:id="@+id/movieFragment"
+    android:background="?android:attr/colorBackground"
+    android:layout_marginTop="30dp">
+
+    <ImageView
+        android:layout_width="113dp"
+        android:layout_height="113dp"
+        android:id="@+id/profilePoster"
+        android:layout_gravity="left|top" />
+
+    <ImageView
+        android:layout_width="113dp"
+        android:layout_height="113dp"
+        android:id="@+id/detailedPoster"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:layout_width="113dp"
+        android:layout_height="113dp"
+        android:id="@+id/originalPoster"
+        android:layout_gravity="right|top"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="96dp"
+        android:layout_gravity="left|center_vertical"
+        android:id="@+id/synopsis"
+        android:layout_below="@+id/profilePoster"
+        android:layout_alignParentStart="true"
+        android:layout_alignEnd="@+id/originalPoster" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Рейтинг аудитории"
+        android:id="@+id/audianceRating"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="46dp"
+        android:layout_gravity="left|center_vertical"
+        android:id="@+id/release"
+        android:layout_marginTop="35dp"
+        android:layout_below="@+id/audianceRating"
+        android:layout_toEndOf="@+id/audianceRating"
+        android:layout_alignEnd="@+id/originalPoster" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text=" Дата релиза:"
+        android:id="@+id/textView"
+        android:layout_alignTop="@+id/release"
+        android:layout_alignParentStart="true" />
+
+</RelativeLayout>

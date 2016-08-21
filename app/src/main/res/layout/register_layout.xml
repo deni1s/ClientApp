@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="45dp">
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:ems="10"
+        android:id="@+id/emailRegister"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:textColorHint="@color/colorPrimary"
+        android:hint="E-mail" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/passwordRegister"
+        android:layout_below="@+id/emailRegister"
+        android:layout_alignStart="@+id/emailRegister"
+        android:textColorHint="@color/colorPrimary"
+        android:hint="Password" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/nameRegister"
+        android:layout_below="@+id/passwordRegister"
+        android:layout_alignStart="@+id/passwordRegister"
+        android:textColorHint="@color/colorPrimary"
+        android:hint="Your Name" />
+
+    <ImageView
+        android:id="@+id/avatar"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_above="@+id/uploadImage"
+        android:layout_alignStart="@+id/uploadImage"
+        android:layout_marginStart="30dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Загрузить аватар"
+        android:id="@+id/uploadImage"
+        android:layout_alignBottom="@+id/nameRegister"
+        android:layout_toStartOf="@+id/passwordRegister" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Зарегистрироваться"
+        android:id="@+id/register"
+        android:layout_below="@+id/nameRegister"
+        android:layout_marginTop="25dp"
+        android:layout_alignStart="@+id/uploadImage"
+        android:layout_alignEnd="@+id/nameRegister"
+        android:textStyle="bold"
+        android:background="@color/colorPrimary" />
+
+</RelativeLayout>

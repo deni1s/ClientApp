@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="45dp">
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:ems="10"
+        android:id="@+id/emailEdit"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:textColorHint="@color/colorPrimary"
+        android:hint="E-mail" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/passwordEdit"
+        android:layout_below="@+id/emailEdit"
+        android:layout_alignStart="@+id/emailEdit"
+        android:textColorHint="@color/colorPrimary"
+        android:hint="Password" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/nameEdit"
+        android:layout_below="@+id/passwordEdit"
+        android:layout_alignStart="@+id/passwordEdit"
+        android:textColorHint="@color/colorPrimary"
+        android:hint="Your Name" />
+
+    <ImageView
+        android:id="@+id/avatarEdit"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_above="@+id/uploadImageEdit"
+        android:layout_alignStart="@+id/uploadImageEdit"
+        android:layout_marginStart="30dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Загрузить аватар"
+        android:id="@+id/uploadImageEdit"
+        android:layout_above="@+id/edit"
+        android:layout_toStartOf="@+id/passwordEdit" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Редактировать"
+        android:id="@+id/edit"
+        android:textStyle="bold"
+        android:background="@color/colorPrimary"
+        android:layout_below="@+id/nameEdit"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp" />
+
+</RelativeLayout>

@@ -7,4 +7,8 @@
     <string name="error_invalid_password">Короткий пароль</string>
     <string name="error_field_required">Это поле обязтельное</string>
 
+    <string name="AccessTokenTimeOut">AccessTokenTimeOut</string>
+    <string name="ValidAccessToken">ValidAccessToken</string>
+    <string name="BadAccessToken">BadAccessToken</string>
+
 </resources>

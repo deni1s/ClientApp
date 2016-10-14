@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
-import com.startandroid.client.Fragments.MovieActivity;
+import com.startandroid.client.Activities.MovieActivity;
 import com.startandroid.client.R;
 import com.startandroid.client.Responses.MovieResponse;
 

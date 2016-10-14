@@ -1,7 +1,7 @@
-package com.startandroid.client.Fragments;
+package com.startandroid.client.Activities;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.ActionBarActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,10 +15,9 @@ import de.greenrobot.event.EventBus;
 /**
  * Created by Денис on 08.08.2016.
  */
-public class MovieActivity extends FragmentActivity {
+public class MovieActivity extends ActionBarActivity {
 
     MovieResponse.MoviesBean movie;
-
 
 
     @Override
@@ -28,6 +27,7 @@ public class MovieActivity extends FragmentActivity {
 
         EventBus.getDefault().registerSticky(this);
 
+        new NavigationBar().setDrawer(getApplicationContext(), R.id.toolbarMovie);
         ImageView progilePoster = (ImageView) findViewById(R.id.profilePoster);
         ImageView detailedPoster = (ImageView) findViewById(R.id.detailedPoster);
         ImageView originalPoster = (ImageView) findViewById(R.id.originalPoster);
@@ -43,11 +43,10 @@ public class MovieActivity extends FragmentActivity {
 
         TextView release_data = (TextView) findViewById(R.id.release);
         release_data.setText(movie.getReleaseDates().getTheater());
-
-
     }
 
-    public void onEventMainThread(MovieSendEvent event){
+
+    public void onEventMainThread(MovieSendEvent event) {
        this.movie = event.movie;
     }
 }

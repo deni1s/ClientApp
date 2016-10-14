@@ -3,7 +3,7 @@ package com.startandroid.client.Responses;
 /**
  * Created by Денис on 29.07.2016.
  */
-public class UserResponse {
+public class User {
     /**
      * email : email@email.com
      * name : Denis
@@ -36,14 +36,6 @@ public class UserResponse {
     public void setName(String name) {
         this.name = name;
     }
-
-    public String getAccessToken() {
-        return accessToken;
-    }
-
-    public void setAccessToken(String accessToken) {
-        this.accessToken = accessToken;
-    } //singleton
 
     public String getAvatar() {
         return avatar;

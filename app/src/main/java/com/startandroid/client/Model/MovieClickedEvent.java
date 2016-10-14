@@ -1,4 +1,6 @@
-package com.startandroid.client.Responses;
+package com.startandroid.client.Model;
+
+import com.startandroid.client.Responses.MovieResponse;
 
 /**
  * Created by Денис on 11.08.2016.

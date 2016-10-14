@@ -9,6 +9,19 @@
         android:layout_width="113dp"
         android:layout_height="113dp"
         android:id="@+id/profilePoster"
+        android:layout_gravity="left|top"
+        android:layout_below="@+id/toolbarMovie"
+        android:layout_alignParentStart="true" />
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbarMovie"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:minHeight="?attr/actionBarSize"
+        android:paddingTop="@dimen/tool_bar_top_padding"
+        android:transitionName="actionBar"
         android:layout_gravity="left|top" />
 
     <ImageView
@@ -16,7 +29,7 @@
         android:layout_height="113dp"
         android:id="@+id/detailedPoster"
         android:layout_gravity="center_horizontal|top"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/toolbarMovie"
         android:layout_centerHorizontal="true" />
 
     <ImageView
@@ -24,7 +37,7 @@
         android:layout_height="113dp"
         android:id="@+id/originalPoster"
         android:layout_gravity="right|top"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/toolbarMovie"
         android:layout_alignParentEnd="true" />
 
     <TextView
@@ -34,6 +47,7 @@
         android:id="@+id/synopsis"
         android:layout_below="@+id/profilePoster"
         android:layout_alignParentStart="true"
+        android:layout_marginTop="46dp"
         android:layout_alignEnd="@+id/originalPoster" />
 
     <TextView
@@ -42,8 +56,9 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Рейтинг аудитории"
         android:id="@+id/audianceRating"
+        android:layout_below="@+id/profilePoster"
         android:layout_alignParentStart="true"
-        android:layout_centerVertical="true" />
+        android:layout_marginTop="170dp" />
 
     <TextView
         android:layout_width="wrap_content"

@@ -10,10 +10,10 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Fragments.RegisterActivity"></activity>
-        <activity android:name=".Fragments.MovieListActivity"></activity>
-        <activity android:name=".Fragments.MovieActivity"></activity>
-        <activity android:name=".Fragments.EditUserActivity"></activity>
+        <activity android:name=".Activities.RegisterActivity"></activity>
+        <activity android:name=".Activities.MovieListActivity"></activity>
+        <activity android:name=".Activities.MovieActivity"></activity>
+        <activity android:name=".Activities.EditUserActivity"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -7,28 +7,48 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
-import com.startandroid.client.API.BaseApi;
-import com.startandroid.client.Fragments.MovieListActivity;
-import com.startandroid.client.Fragments.RegisterActivity;
+import com.github.rahatarmanahmed.cpv.CircularProgressView;
+import com.startandroid.client.API.App;
+import com.startandroid.client.API.AuthApi.AuthAPI;
+import com.startandroid.client.API.AuthApi.AuthListener;
+import com.startandroid.client.Activities.MovieListActivity;
+import com.startandroid.client.Activities.RegisterActivity;
 
 public class MainActivity extends AppCompatActivity {
 
     EditText emailView;
     EditText passwordView;
-
+    CircularProgressView loadProgView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+       // AppUser.createInstance(getApplicationContext());
+        App.getInstance().getAppUser().createInstance(getApplicationContext());
+        //App.getInstance().getAppUser()
+        //App.getInstance().getAuthApi()
+
+        if (App.getInstance().getAppUser().isAuthenticated()) {
+            authenticate();
+            return;
+        }
         setContentView(R.layout.activity_main);
         emailView = (EditText) findViewById(R.id.email);
         passwordView = (EditText) findViewById(R.id.password);
+
+        loadProgView = (CircularProgressView) findViewById(R.id.progress);
+        loadProgView.setVisibility(View.INVISIBLE);
 
         Button enter = (Button) findViewById(R.id.enter);
         enter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                attemptLogin();
+                try {
+                    attemptLogin();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         });
         Button register = (Button) findViewById(R.id.register);
@@ -40,25 +60,21 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private String getToken(){
-        Intent intent = new Intent(MainActivity.this, MovieListActivity.class);
-        return new BaseApi().sendRequest(emailView.toString(), passwordView.toString(), "Enter", intent);
-    }
 
     private boolean isEmailValid(String email) {
-        return email.contains("@");
+        return (email.contains("@") && !email.contains("@@"));
     }
 
     private boolean isPasswordValid(String password) {
         return password.length() > 4;
     }
 
-    private void attemptLogin() {
+    private void attemptLogin() throws InterruptedException {
 
         emailView.setError(null);
         passwordView.setError(null);
-        String email = emailView.getText().toString();
-        String password = passwordView.getText().toString();
+        final String email = emailView.getText().toString();
+        final String password = passwordView.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
@@ -85,14 +101,25 @@ public class MainActivity extends AppCompatActivity {
             // There was an error; don't attempt login and focus the first
             // form field with an error.
             focusView.requestFocus();
-        } else {
-            // Show a progress spinner, and kick off a background task to
-            // perform the user login attempt.
-            Intent intent = new Intent(getApplicationContext(), MovieListActivity.class);
-            intent.putExtra("accessToken","" + getToken());
-            startActivity(intent);
+            return;
         }
+        loadProgView.setVisibility(View.VISIBLE);
+        new AuthAPI().authenticate(email, password, new AuthListener() {
+            @Override
+            public void onDataLoaded(String accessToken) {
+                App.getInstance().getAppUser().addAccessToken(accessToken);
+                authenticate();
+            }
+
+            @Override
+            public void onFailure(String error) {
+                Toast.makeText(getApplicationContext(), error, Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
-
+    private void authenticate() {
+        Intent intent = new Intent(getApplicationContext(), MovieListActivity.class);
+        startActivity(intent);
+    }
 }

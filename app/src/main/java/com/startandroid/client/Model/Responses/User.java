@@ -1,4 +1,4 @@
-package com.startandroid.client.Responses;
+package com.startandroid.client.Model.Responses;
 
 /**
  * Created by Денис on 29.07.2016.

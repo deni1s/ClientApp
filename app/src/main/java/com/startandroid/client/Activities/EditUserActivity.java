@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
-import com.startandroid.client.API.App;
+import com.startandroid.client.Model.App;
 import com.startandroid.client.R;
 
 import java.io.FileNotFoundException;
@@ -33,6 +33,7 @@ public class EditUserActivity extends FragmentActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_user_layout);
+
 
         avatarImageView = (ImageView) findViewById(R.id.avatarEdit);
         Picasso.with(getApplicationContext()).load(App.getInstance().getAppUser().getAvatar()).into(avatarImageView);

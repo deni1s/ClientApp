@@ -14,8 +14,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.github.rahatarmanahmed.cpv.CircularProgressView;
-import com.startandroid.client.API.App;
-import com.startandroid.client.API.AuthApi.AuthListener;
+import com.startandroid.client.Model.API.AuthApi.AuthListener;
+import com.startandroid.client.Model.App;
 import com.startandroid.client.R;
 
 import java.io.FileNotFoundException;
@@ -114,7 +114,7 @@ public class RegisterActivity extends FragmentActivity{
         App.getInstance().getAuthApi().register(email, password, name, new AuthListener() {
             @Override
             public void onDataLoaded(String accessToken) {
-                App.getInstance().getAppUser().addAccessToken(accessToken);
+                App.getInstance().getAppUser().setAccessToken(accessToken);
                 enter();
             }
 
@@ -127,7 +127,7 @@ public class RegisterActivity extends FragmentActivity{
     }
 
     private boolean isEmailValid(String email) {
-        return (email.contains("@") && !email.contains("@@"));
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
     private boolean isPasswordValid(String password) {

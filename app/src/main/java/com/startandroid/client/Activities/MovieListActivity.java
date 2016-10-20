@@ -1,30 +1,30 @@
 package com.startandroid.client.Activities;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.github.rahatarmanahmed.cpv.CircularProgressView;
-import com.startandroid.client.API.MovieApi.MovieApi;
-import com.startandroid.client.API.MovieApi.MovieListener;
+import com.startandroid.client.Model.API.MovieApi.MovieApi;
+import com.startandroid.client.Model.API.MovieApi.MovieListener;
 import com.startandroid.client.Model.EndlessListView;
-import com.startandroid.client.Model.MovieListAdapter;
+import com.startandroid.client.Model.Responses.MovieResponse;
 import com.startandroid.client.R;
-import com.startandroid.client.Responses.MovieResponse;
+import com.startandroid.client.View.MovieListAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Денис on 29.07.2016.
  */
-public class MovieListActivity extends ActionBarActivity {
+public class MovieListActivity extends BaseActivity {
 
     ListView listView;
     MovieListAdapter adapter;
     final MovieApi movieApi = new MovieApi();
-    ArrayList<MovieResponse.MoviesBean> moviesBean = new ArrayList<MovieResponse.MoviesBean>();
+    ArrayList<MovieResponse> moviesBean = new ArrayList<MovieResponse>();
     CircularProgressView progressView;
 
     @Override
@@ -46,15 +46,14 @@ public class MovieListActivity extends ActionBarActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-      //  finish();
-     //   System.exit(0);
+        System.exit(0);
     }
 
 
     private void attemptSetAdapter() {
         movieApi.getMovieList(new MovieListener() {
             @Override
-            public void onDataLoaded(final ArrayList<MovieResponse.MoviesBean> movies) {
+            public void onDataLoaded(final List<MovieResponse> movies) {
                 moviesBean.addAll(movies);
                 setAdapter(moviesBean);
                 listView.setOnScrollListener(new EndlessListView(getApplicationContext(), movies.size()) {
@@ -63,7 +62,6 @@ public class MovieListActivity extends ActionBarActivity {
                         loadMoreMovies();
                     }
                 });
-                new NavigationBar().setDrawer(getApplicationContext(), R.id.toolbar);
             }
 
             @Override
@@ -74,7 +72,7 @@ public class MovieListActivity extends ActionBarActivity {
         });
     }
 
-    private void setAdapter(ArrayList<MovieResponse.MoviesBean> movies) {
+    private void setAdapter(ArrayList<MovieResponse> movies) {
         adapter = new MovieListAdapter(getApplicationContext(), movies, getSupportFragmentManager());
         listView.setAdapter(adapter);
         progressView.setVisibility(View.INVISIBLE);
@@ -84,7 +82,7 @@ public class MovieListActivity extends ActionBarActivity {
         progressView.setVisibility(View.VISIBLE);
         movieApi.getMovieList(new MovieListener() {
             @Override
-            public void onDataLoaded(final ArrayList<MovieResponse.MoviesBean> movies) {
+            public void onDataLoaded(final List<MovieResponse> movies) {
                 moviesBean.addAll(movies);
                 adapter.notifyDataSetChanged();
             }

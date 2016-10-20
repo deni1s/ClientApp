@@ -1,7 +1,8 @@
-package com.startandroid.client.API;
+package com.startandroid.client.Model.API;
 
 import com.loopj.android.http.RequestParams;
-import com.startandroid.client.API.BaseApi.BaseApi;
+import com.startandroid.client.Model.API.BaseApi.BaseApi;
+import com.startandroid.client.Model.App;
 
 /**
  * Created by Денис on 20.09.2016.
@@ -9,7 +10,7 @@ import com.startandroid.client.API.BaseApi.BaseApi;
 public class PrivateApi extends BaseApi {
     protected RequestParams prepareParams(RequestParams params) {
         params = super.prepareParams(params);
-        params.put("accessToken", AppUser.getInstance().getAccessToken());
+        params.put("accessToken", App.getInstance().getAppUser().getAccessToken());
         return params;
     }
 }

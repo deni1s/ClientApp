@@ -1,23 +1,21 @@
 package com.startandroid.client.Activities;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
-import com.startandroid.client.Model.MovieSendEvent;
+import com.startandroid.client.Model.Events.MovieSendEvent;
+import com.startandroid.client.Model.Responses.MovieResponse;
 import com.startandroid.client.R;
-import com.startandroid.client.Responses.MovieResponse;
 
 import de.greenrobot.event.EventBus;
 
 /**
  * Created by Денис on 08.08.2016.
- */
-public class MovieActivity extends ActionBarActivity {
+ */public class MovieActivity extends BaseActivity {
 
-    MovieResponse.MoviesBean movie;
+    MovieResponse movie;
 
 
     @Override
@@ -27,7 +25,6 @@ public class MovieActivity extends ActionBarActivity {
 
         EventBus.getDefault().registerSticky(this);
 
-        new NavigationBar().setDrawer(getApplicationContext(), R.id.toolbarMovie);
         ImageView progilePoster = (ImageView) findViewById(R.id.profilePoster);
         ImageView detailedPoster = (ImageView) findViewById(R.id.detailedPoster);
         ImageView originalPoster = (ImageView) findViewById(R.id.originalPoster);
@@ -38,15 +35,15 @@ public class MovieActivity extends ActionBarActivity {
         Picasso.with(getApplicationContext()).load(movie.getPosters().getOriginal()).into(originalPoster);
 
 
-        TextView synopsis = (TextView) findViewById(R.id.synopsis);
-        synopsis.setText(movie.getSynopsis());
+        TextView synopsisView = (TextView) findViewById(R.id.synopsis);
+        synopsisView.setText(movie.getSynopsis());
 
-        TextView release_data = (TextView) findViewById(R.id.release);
-        release_data.setText(movie.getReleaseDates().getTheater());
+        TextView releaseDataView = (TextView) findViewById(R.id.release);
+        releaseDataView.setText(movie.getReleaseDates().getTheater());
     }
 
 
     public void onEventMainThread(MovieSendEvent event) {
-       this.movie = event.movie;
+        this.movie = event.movie;
     }
 }

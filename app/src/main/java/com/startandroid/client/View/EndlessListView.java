@@ -8,7 +8,6 @@ import android.widget.ListView;
  * Created by Денис on 07.08.2016.
  */
 public abstract class EndlessListView extends ListView implements AbsListView.OnScrollListener {
-
     private int bufferItemCount = 10;
     private int currentPage = 0;
     private int itemCount = 0;

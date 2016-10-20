@@ -1,4 +1,4 @@
-package com.startandroid.client.API;
+package com.startandroid.client.Model;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -12,53 +12,57 @@ public class AppUser {
 
     private static SharedPreferences settings = null;
     private static SharedPreferences.Editor editor = null;
-    private static Context context = null;
 
-    public static void createInstance(Context contextt) {
-        context = contextt;
+    AppUser(Context context) {
+        createInstance(context);
+    }
+
+    //TODO: use simple constructor with context
+    public static void createInstance(Context context) {
         settings = context.getSharedPreferences(STORAGE_NAME, Context.MODE_PRIVATE);
         editor = settings.edit();
     }
 	
 	public boolean isAuthenticated() {
-        if (getAccessToken().equals("")) {
+        try {
+            return !getAccessToken().equals("");
+        }
+        catch(Exception e){
             return false;
-        } else {
-            return true;
         }
     }
 
-    public void addEmail(String email) {
+    public void setEmail(String email) {
         editor.putString("Email", email);
         editor.apply();
     }
 
-    public void addName(String name) {
+    public void setName(String name) {
         editor.putString("Name", name);
         editor.apply();
     }
 
-    public void addAvatar(String avatar) {
+    public void setAvatar(String avatar) {
         editor.putString("avatar", avatar);
         editor.apply();
     }
 
-    public void addAccessToken(String accessToken) {
+    public void setAccessToken(String accessToken) {
         editor.putString("accessToken", accessToken);
         editor.apply();
     }
 
-    public static void clearUser() {
+    public void clearUser() {
         editor.clear();
         editor.apply();
     }
 
     public String getAccessToken() {
-        return settings.getString("accessToken", null );
+        return settings.getString("accessToken", null);
     }
 
     public String getEmail() {
-        return settings.getString("Email", null );
+        return settings.getString("Email", null);
     }
 
 

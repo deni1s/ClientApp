@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 
+
 android {
     compileSdkVersion 24
     buildToolsVersion "23.0.3"
@@ -10,10 +11,11 @@ android {
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
-        buildConfigField 'String', 'MOVIE_LIST_PATH', '"3w5vl"'
+        buildConfigField 'String', 'MOVIE_LIST_PATH', '"4jo9c"'
         buildConfigField 'String', 'API_PATH', '"https://api.myjson.com/bins/"'
-        buildConfigField 'String', 'TOKEN_PATH', '"53zkt"'
-        buildConfigField 'String', 'USER_INFO_PATH', '"17yu5"'
+        buildConfigField 'String', 'USER_INFO_PATH', '"2xsxc"'
+        buildConfigField 'String', 'API_AUTH_URL', '"2a85s"'
+        buildConfigField 'String', 'API_REGISTRATION_URL', '"2a85s"'
     }
     buildTypes {
         release {

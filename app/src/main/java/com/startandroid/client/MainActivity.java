@@ -1,7 +1,9 @@
 package com.startandroid.client;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
@@ -10,24 +12,31 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.github.rahatarmanahmed.cpv.CircularProgressView;
-import com.startandroid.client.API.App;
-import com.startandroid.client.API.AuthApi.AuthAPI;
-import com.startandroid.client.API.AuthApi.AuthListener;
 import com.startandroid.client.Activities.MovieListActivity;
 import com.startandroid.client.Activities.RegisterActivity;
+import com.startandroid.client.Model.API.AuthApi.AuthAPI;
+import com.startandroid.client.Model.API.AuthApi.AuthListener;
+import com.startandroid.client.Model.API.UserApi.UserListener;
+import com.startandroid.client.Model.App;
+import com.startandroid.client.Model.Responses.User;
 
 public class MainActivity extends AppCompatActivity {
 
     EditText emailView;
     EditText passwordView;
     CircularProgressView loadProgView;
+    AlertDialog.Builder ad;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       // AppUser.createInstance(getApplicationContext());
-        App.getInstance().getAppUser().createInstance(getApplicationContext());
-        //App.getInstance().getAppUser()
-        //App.getInstance().getAuthApi()
+        App.createInstance(getApplicationContext());
 
         if (App.getInstance().getAppUser().isAuthenticated()) {
             authenticate();
@@ -62,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private boolean isEmailValid(String email) {
-        return (email.contains("@") && !email.contains("@@"));
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
     private boolean isPasswordValid(String password) {
@@ -107,19 +116,45 @@ public class MainActivity extends AppCompatActivity {
         new AuthAPI().authenticate(email, password, new AuthListener() {
             @Override
             public void onDataLoaded(String accessToken) {
-                App.getInstance().getAppUser().addAccessToken(accessToken);
+                App.getInstance().getAppUser().setAccessToken(accessToken);
                 authenticate();
             }
 
             @Override
             public void onFailure(String error) {
+                loadProgView.setVisibility(View.INVISIBLE);
                 Toast.makeText(getApplicationContext(), error, Toast.LENGTH_LONG).show();
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setTitle(error)
+                        .setMessage(error)
+                        .setCancelable(false)
+                        .setNegativeButton("OK",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+                AlertDialog alert = builder.create();
+                alert.show();
             }
         });
     }
 
     private void authenticate() {
-        Intent intent = new Intent(getApplicationContext(), MovieListActivity.class);
-        startActivity(intent);
+            App.getInstance().getUserApi().getUserInfo(new UserListener() {
+                @Override
+                public void onDataLoaded(User user) {
+                    App.getInstance().getAppUser().setAvatar(user.getAvatar());
+                    App.getInstance().getAppUser().setEmail(user.getEmail());
+                    App.getInstance().getAppUser().setName(user.getName());
+                    Intent intent = new Intent(getApplicationContext(), MovieListActivity.class);
+                    startActivity(intent);
+                }
+
+                @Override
+                public void onFailure(String error) {
+
+                }
+            });
     }
 }

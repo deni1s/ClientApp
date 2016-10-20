@@ -1,4 +1,4 @@
-package com.startandroid.client.API.AuthApi;
+package com.startandroid.client.Model.API.AuthApi;
 
 /**
  * Created by Денис on 20.09.2016.

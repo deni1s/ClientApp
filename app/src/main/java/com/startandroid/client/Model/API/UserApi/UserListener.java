@@ -1,6 +1,7 @@
-package com.startandroid.client.API.UserApi;
+package com.startandroid.client.Model.API.UserApi;
 
-import com.startandroid.client.Responses.User;
+
+import com.startandroid.client.Model.Responses.User;
 
 /**
  * Created by Денис on 20.09.2016.

@@ -1,4 +1,4 @@
-package com.startandroid.client.Model;
+package com.startandroid.client.View;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,8 +12,9 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.startandroid.client.Activities.MovieActivity;
+import com.startandroid.client.Model.Events.MovieSendEvent;
+import com.startandroid.client.Model.Responses.MovieResponse;
 import com.startandroid.client.R;
-import com.startandroid.client.Responses.MovieResponse;
 
 import java.util.List;
 
@@ -24,11 +25,11 @@ import de.greenrobot.event.EventBus;
  */
 public class MovieListAdapter extends BaseAdapter{
 
-    private List<MovieResponse.MoviesBean> item;
+    private List<MovieResponse> item;
     private Context context;
     FragmentManager fragmentManager;
 
-    public MovieListAdapter(Context context, List<MovieResponse.MoviesBean> item, FragmentManager fragmentManager) {
+    public MovieListAdapter(Context context, List<MovieResponse> item, FragmentManager fragmentManager) {
         this.item = item;
         this.fragmentManager = fragmentManager;
         this.context = context;
@@ -40,7 +41,7 @@ public class MovieListAdapter extends BaseAdapter{
     }
 
     @Override
-    public MovieResponse.MoviesBean getItem(int i) {
+    public MovieResponse getItem(int i) {
         return item.get(i);
     }
 
@@ -54,7 +55,7 @@ public class MovieListAdapter extends BaseAdapter{
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.each_list_item, parent, false);
 
-        MovieResponse.MoviesBean item = (MovieResponse.MoviesBean) getItem(position);
+        MovieResponse item = (MovieResponse) getItem(position);
         ImageView image = (ImageView) rowView.findViewById(R.id.thumbnail);
         TextView title = (TextView) rowView.findViewById(R.id.title);
         TextView rating = (TextView) rowView.findViewById(R.id.rating);

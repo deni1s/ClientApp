@@ -1,10 +1,11 @@
-package com.startandroid.client.API.BaseApi;
+package com.startandroid.client.Model.API.BaseApi;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.startandroid.client.BuildConfig;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -26,20 +27,22 @@ public class BaseApi {
                 String code = null;
                 try {
                     meta = response.getJSONObject("meta");
-                    code = (String) meta.get("code");
+                    code = meta.getString("code");
                 } catch (JSONException e) {
+                    listener.onFailure("Failure");
                     e.printStackTrace();
                 }
-                if (code.equals("0")) {
+                if (code.equals("1")) {
                     if (listener != null) {
-                        JSONObject data = null;
+                        JSONArray data = null;
                         try {
-                            data = response.getJSONObject("data");
+                            data = response.getJSONArray("data");
                             listener.onDataLoaded(data);
                         } catch (JSONException e) {
-                            e.printStackTrace();
+                               listener.onFailure("Unable to get data");
+                               e.printStackTrace();
                             try {
-                                listener.onFailure((String) meta.get("ErrorDescription"));
+                                listener.onFailure(meta.getString("error"));
                             } catch (JSONException e1) {
                                 listener.onFailure("Ошибка ответа сервера");
                                 e1.printStackTrace();
@@ -48,7 +51,7 @@ public class BaseApi {
                     }
                 } else {
                     try {
-                        listener.onFailure((String) meta.get("ErrorDescription"));
+                        listener.onFailure(meta.getString("error"));
                     } catch (JSONException e) {
                         listener.onFailure("Ошибка ответа сервера");
                         e.printStackTrace();

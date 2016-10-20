@@ -1,14 +1,14 @@
-{ 
-  "meta":
-	  {
-	     "code" : "1",
-		 "error":"all cool",
-		 "accessToken":"j23f90vn23b9v43"
-		 },
-	"data": [ {
-	"email":"email@email.com",
-	"name":"Denis",
-	"avatar": "http://minionomaniya.ru/wp-content/uploads/2016/01/Cartoons_Minions_little_girl_051610_.jpg"
-	  }
-	]
+{
+  "meta": {
+    "code": "1",
+    "error": "all cool",
+    "accessToken": "j23f90vn23b9v43"
+  },
+  "data": [
+    {
+      "email": "email@email.com",
+      "name": "Denis",
+      "avatar": "http://minionomaniya.ru/wp-content/uploads/2016/01/Cartoons_Minions_little_girl_051610_.jpg"
+    }
+  ]
 }
